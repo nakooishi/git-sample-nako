@@ -1,0 +1,10 @@
+name: Hello Actions
+
+on: [push]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: メッセージを表示
+        run: echo "GitHub Actionsが動きました！"
