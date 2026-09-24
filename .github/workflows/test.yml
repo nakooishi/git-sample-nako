@@ -1,0 +1,22 @@
+name: Python Tests
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのコードを取得
+        uses: actions/checkout@v7
+
+      - name: Pythonを準備
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: テストを実行
+        run: python -m unittest -v
