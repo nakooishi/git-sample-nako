@@ -7,7 +7,13 @@ permissions:
 
 jobs:
   test:
+    name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.12', '3.13']
 
     steps:
       - name: リポジトリのコードを取得
@@ -16,7 +22,7 @@ jobs:
       - name: Pythonを準備
         uses: actions/setup-python@v7
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python-version }}
 
       - name: テストを実行
         run: python -m unittest -v
