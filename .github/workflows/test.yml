@@ -25,4 +25,15 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: テストを実行
-        run: python -m unittest -v
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m unittest -v 2>&1 | tee test-results.txt
+
+      - name: テスト結果を保存
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: test-results.txt
+          retention-days: 7
